@@ -41,4 +41,4 @@
 ### 틀린 부분 
 
  <p> for i in range(4, N+1): D[i] = D[i-1] + D[i-2] + D[i-3]</p>
- <p> **N+1이 4보다 작을 때 IndexError 발생** </p>
+ **N+1이 4보다 작을 때 IndexError 발생**
