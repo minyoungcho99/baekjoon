@@ -39,7 +39,8 @@
  <p>각 테스트 케이스마다, n을 1, 2, 3의 합으로 나타내는 방법의 수를 출력한다.</p>
 
 ### 틀린 부분 
-~~~
-for i in range(4, N+1): D[i] = D[i-1] + D[i-2] + D[i-3]
+~~~python
+for i in range(4, N+1):
+	D[i] = D[i-1] + D[i-2] + D[i-3]
 ~~~
 **N+1이 4보다 작을 때 IndexError 발생**
