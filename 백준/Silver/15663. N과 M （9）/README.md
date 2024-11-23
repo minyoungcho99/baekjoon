@@ -34,3 +34,27 @@
 
 <p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
 
+### 틀린 부분 
+~~~python
+def sequence(num, nums):
+     if num == M:
+         r_tuple = tuple(r)
+         if r_tuple not in result:
+             result.append(r_tuple)
+             print(" ".join(map(str, r_tuple)))
+             return
+~~~
+**중복된 결과값을 출력하지 않기 위해 리스트에 저장하여 깊이가 M일 때마다 원소 확인을 했더니 시간초과 발생**
+
+~~~python
+    temp = 0
+    for i in range(len(nums)):
+        if not check[i] and temp != nums[i]:
+            check[i] = True
+            r.append(nums[i])
+            temp = nums[i]
+            sequence(num+1)
+            r.pop()
+            check[i] = False
+~~~
+**temp를 통해 중복되지 않을 때만 호출하도록 중복 체크함**
