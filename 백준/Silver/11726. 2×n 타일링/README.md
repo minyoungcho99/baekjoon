@@ -52,4 +52,5 @@ else:
 
     print(D[N])
 ~~~
-**D[1], D[2]를 N을 생각하지 않고 assign해 IndexError가 발생함 (N = 1일 때, D[2]는 out of index) else에서만 D를 initialize 하고 index 1,2의 초기값을 주면서 해결**
+**D[1], D[2]를 N을 생각하지 않고 assign해 IndexError가 발생함 (N = 1일 때, D[2]는 out of index)**
+**-> else에서만 D를 initialize 하고 index 1,2의 초기값을 주면서 해결**
