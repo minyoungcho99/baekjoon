@@ -30,3 +30,26 @@
 
  <p>첫째 줄에 2×n 크기의 직사각형을 채우는 방법의 수를 10,007로 나눈 나머지를 출력한다.</p>
 
+
+### 틀린 부분 
+~~~python
+# 2xn 타일링
+import sys
+
+N = int(sys.stdin.readline())
+D = [0] * (N + 1)
+D[1], D[2] = 1, 2
+
+if N == 1:
+    print(1)
+
+elif N == 2:
+    print(2)
+
+else:
+    for i in range(3, N + 1):
+        D[i] = (D[i - 1] + D[i - 2]) % 10007
+
+    print(D[N])
+~~~
+**D[1], D[2]를 N을 생각하지 않고 assign해 IndexError가 발생함 (N = 1일 때, D[2]는 out of index)**
