@@ -30,3 +30,32 @@
 
  <p>첫째 줄에 주어진 탑들의 순서대로 각각의 탑들에서 발사한 레이저 신호를 수신한 탑들의 번호를 하나의 빈칸을 사이에 두고 출력한다. 만약 레이저 신호를 수신하는 탑이 존재하지 않으면 0을 출력한다.</p>
 
+### 틀린 부분 
+~~~python
+# 탑
+import sys
+
+N = int(sys.stdin.readline().rstrip())
+T = list(map(int, sys.stdin.readline().split()))
+
+idx_T = []
+for i, t in enumerate(T):
+    idx_T.append((i + 1, t))
+
+ans = [0 for _ in range(N)]
+
+for i in range(N - 1):
+    stack = idx_T[0:N - i]
+    top = stack.pop()
+
+    while stack:
+        popped = stack.pop()
+
+        if top[1] <= popped[1]:
+            ans[N - 1 - i] = popped[0]
+            break
+
+print(' '.join(map(str, ans)))
+~~~
+**레이저 전파가 송신된 탑의 idx가 필요하기 때문에 enumerate를 써서 stack에 idx와 value를 같이 저장했지만 시간초과, for loop 한개로 stack에 append하면서 top of the stack과 T[i]를 비교하여 크면 ans에 idx 저장, 아닐시 pop() ex) stack[i] <= stack[i+1] 시 stack[i]는 필요없음 stack[i+1]이 더 높아서 먼저 전파를 송신하기 때문**
+
