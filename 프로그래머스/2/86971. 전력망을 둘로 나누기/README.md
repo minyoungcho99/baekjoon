@@ -124,6 +124,6 @@
  a = [1,2,3,4,5]
 
 for i in a[:]:
-        if ~~~~:
-                a.remove(i)
+    if ~~~~:
+        a.remove(i)
 ~~~
