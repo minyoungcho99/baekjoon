@@ -97,3 +97,33 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+>
+### 틀린 부분 
+~~~python
+ def bfs(start):
+        visited[start] = True
+        cnt = 1
+        q = deque([start])
+
+        while q:
+            node = q.popleft()
+
+            for adj in temp_graph[node]:
+                if not visited[adj]:
+                    visited[adj] = True
+                    cnt += 1
+                    q.append(adj)
+
+        return cnt
+~~~
+
+**cnt를 level 별이 아니라 node의 개수 별로 +1 시켜줘야 함**
+**for문을 돌면서 list 안의 element를 반복할 때 list 안의 요소를 remove하면 안되기 때문에 deepcopy를 사용 -> for문에서 list 자체가 아닌 list[:]를 이용해서 반복하면 메모리를 줄일 수 있음**
+
+~~~python
+ a = [1,2,3,4,5]
+
+for i in a[:]:
+        if ~~~~:
+                a.remove(i)
+~~~
