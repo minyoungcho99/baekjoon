@@ -1,12 +1,13 @@
 # 소수 구하기
 import sys
+from math import sqrt
 
 M, N = map(int, sys.stdin.readline().split())
 
 state = [True] * (N + 1)
 state[1] = False
 
-for num in range(2, N + 1):
+for num in range(2, int(sqrt(N)) + 1):
     if not state[num]:
         continue
 
