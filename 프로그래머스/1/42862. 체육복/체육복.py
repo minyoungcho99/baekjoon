@@ -1,23 +1,20 @@
 def solution(n, lost, reserve):
-    for l in lost[:]:
-        if l in reserve[:]:
+    answer = 0
+    
+    for l in lost:
+        print(l)
+        if l in reserve:
             lost.remove(l)
             reserve.remove(l)
-
-    temp = len(lost)
-
-    for l in sorted(lost):
-        if l - 1 in reserve:
-            reserve.remove(l - 1)
-            temp -= 1
-            continue
-
-        elif l + 1 in reserve:
-            reserve.remove(l + 1)
-            temp -= 1
-            continue
-
-    return n - temp
-
-
-print(solution(5, [2, 3], [3, 4]))
+        
+        if l-1 in reserve:
+            lost.remove(l)
+            reserve.remove(l-1)
+        elif l+1 in reserve:
+            lost.remove(l)
+            reserve.remove(l+1)
+    
+    print(lost)
+    answer = n - len(lost)
+    
+    return answer
