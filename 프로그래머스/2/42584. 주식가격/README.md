@@ -58,6 +58,8 @@
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
 
 ### 틀린 부분 
+
+> 1. list slicing/initializing a deque for each top -> **효율성 통과 못함**
 ~~~python
 def solution(prices):
     ans = []
@@ -80,8 +82,8 @@ def solution(prices):
     return ans
 ~~~
 
-**list slicing/initializing a deque for each top -> 효율성이 떨어짐**
 
+> 2. 같은 로직, idx로 O(n^2) 돌면 시간 초과 없이 통과
 ~~~python
 def solution(prices):
     ans = []
@@ -99,7 +101,7 @@ def solution(prices):
 
     return ans
 ~~~
-**같은 로직, idx로 O(n^2) 돌면 시간 초과 없이 통과**
+
 
 ### 올바른 풀이
-stack 사용 -> O(n)
+**stack** 사용 -> O(n)
