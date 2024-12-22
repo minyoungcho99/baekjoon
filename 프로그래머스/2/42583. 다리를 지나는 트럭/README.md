@@ -123,3 +123,35 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+
+### 틀린 부분 
+
+~~~python
+# 다리를 지나는 트럭
+from collections import deque
+
+def solution(bridge_length, weight, truck_weights):
+    time = 0
+    bridge = deque([])
+
+    q = deque(truck_weights)
+    bridge.append(q.popleft())
+    time += 1
+    print(time, bridge)
+
+    while q:
+        x = q.popleft()
+        while len(bridge) + 1 > bridge_length or sum(bridge) + x > weight:
+            bridge.popleft()
+            time += 1
+
+            print(time, bridge)
+
+        bridge.append(x)
+        time += 1
+        print(time, bridge)
+
+    return time + bridge_length
+~~~
+
+> 초별로 올바르게 나가고 올바르게 들어와야 함 **(동시에 초별로 들어오고 나갈 수 있음)**, deque 안에서 pop할 때 다리 위의 트럭이 다리를 건너는 데 걸리는 bridge_length를 고려하지 않았음 deque에 **(트럭 무게, 다리를 벗어나는 시간(현재 시간 + 다리 길이))** 형식으로 append해주고 다리를 벗어나는 시간이 되면 deque에서 popleft() 후 새로운 트럭이 올라갈 수 있으면 append, 불가능하면 시간 +1 시키며 iterate
