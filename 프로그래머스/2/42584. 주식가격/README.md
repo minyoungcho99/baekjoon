@@ -118,6 +118,8 @@ def solution(prices):
         while stack and prices[stack[-1]] > prices[i]:
             j = stack.pop()
             ans[j] = i - j
+
         stack.append(i)
+
     return ans
 ~~~
