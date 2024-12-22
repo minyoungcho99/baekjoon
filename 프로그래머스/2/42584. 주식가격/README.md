@@ -56,3 +56,50 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+>
+> ### 틀린 부분 
+~~~python
+def solution(prices):
+    ans = []
+
+    for i in range(len(prices)):
+        top = prices[i]
+        temp = 0
+        q = deque(prices[i+1:])
+
+        while q:
+            x = q.popleft()
+            if x >= top:
+                temp += 1
+            else:
+                temp += 1
+                break
+
+        ans.append(temp)
+
+    return ans
+~~~
+
+**list slicing/initializing a deque for each top -> 효율성이 떨어짐**
+
+~~~python
+def solution(prices):
+    ans = []
+
+    for i in range(len(prices)):
+        temp = 0
+
+        for j in range(i+1, len(prices)):
+            temp += 1
+
+            if prices[i] > prices[j]:
+                break
+
+        ans.append(temp)
+
+    return ans
+~~~
+**같은 로직, idx로 O(n^2) 돌면 시간 초과 없이 통과**
+
+### 올바른 풀이
+stack 사용 -> O(n)
