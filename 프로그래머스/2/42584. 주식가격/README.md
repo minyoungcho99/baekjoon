@@ -105,3 +105,19 @@ def solution(prices):
 
 ### 올바른 풀이
 **stack** 사용 -> O(n)
+~~~python
+def solution(prices): 
+    # answer을 4초, 3초, 2초, 1초, 0초...로 초기화
+    ans = [i for i in range (len(prices) - 1, -1, -1)]
+    
+    # stack에 idx를 append하며 순회
+    stack = [0]
+
+    for i in range (1, len(prices)):
+        # 주식 가격이 떨어지는 경우에 answer를 갱신
+        while stack and prices[stack[-1]] > prices[i]:
+            j = stack.pop()
+            ans[j] = i - j
+        stack.append(i)
+    return ans
+~~~
