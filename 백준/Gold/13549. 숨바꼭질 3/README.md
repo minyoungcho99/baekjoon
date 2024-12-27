@@ -54,7 +54,7 @@ def bfs(start):
 ~~~
 
 
-> 2. visited[nx] == visited[x] + 1 **방문한 지점이라도 방문한 시간이 같다면 방문할 수 있음**
+> 2. visited[nx] == visited[x] + 1 **방문한 지점이라도 방문한 시간이 같다면 방문할 수 있음 -> 다양한 경로의 수 탐색 가능함**
 ~~~python
 def bfs(start):
     n = 0
