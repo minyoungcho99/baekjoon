@@ -28,3 +28,50 @@
 
  <p>수빈이가 동생을 찾는 가장 빠른 시간을 출력한다.</p>
 
+### 틀린 부분 
+> 1. visited[nx] == 0으로 queue append 여부를 check하면서 K로 가는 여러가지 방법의 수를 계산하기 위해서 visited[K]를 True 처리 하지 않음 **min_t 계산이 안 됨**
+~~~python
+def bfs(start):
+    n = 0
+    min_t = 0
+    visited[start] = True
+    q = deque([(start, 0)])
+
+    while q:
+        x, times = q.popleft()
+
+        if x == K:
+            min_t = times
+            n += 1
+
+        for nx in (2*x, x-1, x+1):
+            if in_range(nx) and not visited[nx]:
+                q.append((nx, times+1))
+                if nx != K:
+                    visited[nx] = True
+
+    return min_t, n
+~~~
+
+
+> 2. visited[nx] == visited[x] + 1 **방문한 지점이라도 방문한 시간이 같다면 방문할 수 있음**
+~~~python
+def bfs(start):
+    n = 0
+    visited[start] = True
+    q = deque([start])
+
+    while q:
+        x = q.popleft()
+
+        if x == K:
+            n += 1
+            continue
+
+        for nx in (2*x, x-1, x+1):
+            if in_range(nx) and (not visited[nx] or visited[nx] == visited[x] + 1):
+                q.append(nx)
+                visited[nx] = visited[x] + 1
+
+    return n
+~~~
