@@ -40,7 +40,7 @@ def bfs(sx, sy):
 
 
 def group(sx, sy):
-    visited_fall[sx][sy] = True
+    visited[sx][sy] = True
     q = deque([(sx, sy)])
     locs = [(sx, sy)]
 
@@ -49,8 +49,8 @@ def group(sx, sy):
 
         for k in range(4):
             nx, ny = x + dx[k], y + dy[k]
-            if in_range(nx, ny) and not visited_fall[nx][ny] and field[nx][ny] == field[x][y]:
-                visited_fall[nx][ny] = True
+            if in_range(nx, ny) and not visited[nx][ny] and field[nx][ny] == field[x][y]:
+                visited[nx][ny] = True
                 locs.append((nx, ny))
                 q.append((nx, ny))
 
@@ -76,7 +76,6 @@ def fall(locs):
 while True:
     is_combo = False
     visited = [[0] * 6 for _ in range(12)]
-    visited_fall = [[0] * 6 for _ in range(12)]
 
     # 터지기
     for i in range(11, -1, -1):
@@ -100,6 +99,8 @@ while True:
         break
 
     combo += 1
+
+    visited = [[0] * 6 for _ in range(12)]
 
     for i in range(11, -1, -1):
         for j in range(6):
