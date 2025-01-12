@@ -38,3 +38,50 @@
 
  <p>첫째 줄부터 차례대로 N개의 줄에 한줄에 하나씩 시리얼 번호를 정렬한 결과를 출력한다.</p>
 
+
+### 설정 조건으로 리스트 정렬/비교하기
+1. A와 B의 길이가 다르면, 짧은 것이 먼저 온다.
+2. 만약 서로 길이가 같다면, A의 모든 자리수의 합과 B의 모든 자리수의 합을 비교해서 작은 합을 가지는 것이 먼저온다. (숫자인 것만 더한다)
+3. 만약 1,2번 둘 조건으로도 비교할 수 없으면, 사전순으로 비교한다. 숫자가 알파벳보다 사전순으로 작다.
+
+> 1. lambda 식
+~~~python
+def sum_num(inputs):
+    result = 0
+    for i in inputs:
+        if i.isdigit():
+            result += int(i)
+    return result
+
+arr.sort(key=lambda x:(len(x), sum_num(x), x))  # priority 순으로 lambda 식 정의 
+~~~
+
+> 2. functools의 cmp_to_key
+~~~python
+from functools import cmp_to_key
+
+def comparator(a, b):
+    total_a = 0
+    total_b = 0
+
+    for i in a:
+        if i in '1234567890':
+            total_a += int(i)
+
+    for i in b:
+        if i in '1234567890':
+            total_b += int(i)
+
+    if total_a > total_b:
+        return 1
+    elif total_a < total_b:
+        return -1
+    else:
+        return 0
+
+words.sort()
+words.sort(key=cmp_to_key(comparator))
+words.sort(key=lambda x: len(x))
+~~~
+
+
