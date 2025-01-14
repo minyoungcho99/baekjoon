@@ -40,3 +40,64 @@
 
  <p>r행 c열을 몇 번째로 방문했는지 출력한다.</p>
 
+### 틀린 부분 
+> 1. 2차원 방문 순서 배열 만듬 - memory limit exceeded **worst case에 2^15 X 2^15의 2차원 배열 생성하고 하나씩 값을 바꿔줌**
+~~~python
+# Z
+import sys
+
+N, r, c = map(int, sys.stdin.readline().split())
+board = [[0] * (2**N) for _ in range(2**N)]
+idx = 0
+
+
+def z(n, sx, sy):
+    global idx
+    if n == 1:
+        board[sx][sy] = idx
+        board[sx][sy+1] = idx + 1
+        board[sx+1][sy] = idx + 2
+        board[sx+1][sy+1] = idx + 3
+
+        idx += 4
+        return
+
+    z(n - 1, sx, sy)
+    z(n - 1, sx, sy + 2**(n-1))
+    z(n - 1, sx + 2**(n-1), sy)
+    z(n - 1, sx + 2**(n-1), sy + 2**(n-1))
+
+
+z(N, 0, 0)
+print(board[r][c])
+~~~
+
+> 2. r행 c열의 방문 순서를 정수로 구하기 - 메모리 초과 안남!
+~~~python
+# Z
+import sys
+
+N, R, C = map(int, sys.stdin.readline().split())
+
+
+def z(n, r, c):
+    if n == 0:
+        return 0
+
+    half = 2**(n-1)
+
+    if r < half and c < half:
+        return z(n - 1, r, c)
+
+    elif r < half <= c:
+        return half * half + z(n - 1, r, c - half)
+
+    elif c < half <= r:
+        return 2 * half * half + z(n - 1, r - half, c)
+
+    else:
+        return 3 * half * half + z(n - 1, r - half, c - half)
+
+
+print(z(N, R, C))
+~~~
