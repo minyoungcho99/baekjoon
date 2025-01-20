@@ -30,3 +30,28 @@
 
  <p>첫째 줄에 두 문자열에 모두 포함 된 부분 문자열 중 가장 긴 것의 길이를 출력한다.</p>
 
+### 틀린 부분 
+> 1. if B[i] == A[j] **if B[i-1] == A[j-1]**
+~~~python
+# 공통 부분 문자열
+import sys
+
+max_str = 0
+A = sys.stdin.readline().strip()
+B = sys.stdin.readline().strip()
+
+a, b = len(A), len(B)
+
+LCS = [[0] * (a+1) for _ in range(b+1)]
+
+for i in range(1, b+1):
+    for j in range(1, a+1):
+        if B[i] == A[j]:
+            LCS[i][j] = LCS[i-1][j-1] + 1
+            max_str = max(max_str, LCS[i][j])
+
+print(max_str)
+~~~
+
+<p>LCS 2차원 배열은 i=0, j=0일 때 0으로 초기값 설정 되어야 함. 그래야 B[i] == A[j] 시작되는 부분(공통부분이 시작되는 부분)에서 1이 될 수 있음!! 그런데 문자열은 0-based로 비교되고 있어서 1-based인 LCS 배열과 맞춰주기 위해서 B[i-1]와 A[j-1] 비교가 필요하당</p>
+
