@@ -30,3 +30,60 @@
 
  <p>조건을 만족하는 최장 연속 부분 수열의 길이를 출력한다.</p>
 
+### 틀린 코드
+> 1. max_len = max(max_len, en - st + 1), en += 1의 위치, freq[nums[en]] <= K *이미 K개 이상이어서 탈출하고 나서 이미 증가한 en까지 세면 안됨, en 확인 후에 freq에 더해주고 en++ 해줘야 함, freq[[nums[en]] < K 이면 freq[nums[en]] == K+1일 때 알아서 탈출**
+~~~python
+# 겹치는 건 싫어
+import sys
+from collections import defaultdict
+
+freq = defaultdict(int)
+N, K = map(int, sys.stdin.readline().split())
+nums = list(map(int, sys.stdin.readline().split()))
+
+en = 0
+max_len = float('-inf')
+
+for st in range(N):
+    while en < N - 1 and freq[nums[en]] <= K:
+        en += 1
+        freq[nums[en]] += 1
+
+    if freq[nums[en]] > K:
+        en -= 1
+        freq[nums[en]] -= 1
+
+    max_len = max(max_len, en - st + 1)
+    freq[nums[st]] -= 1
+
+print(max_len)
+~~~
+
+> 2. max_len = max(max_len, en - st), freq[nums[en]] += 1 후 en++, freq[nums[en]] < K!!
+~~python
+import sys
+from collections import defaultdict
+
+freq = defaultdict(int)
+N, K = map(int, sys.stdin.readline().split())
+nums = list(map(int, sys.stdin.readline().split()))
+
+en = 1
+max_len = 0
+freq[nums[0]] += 1
+
+for st in range(N):
+    while en < N and freq[nums[en]] < K:
+        freq[nums[en]] += 1
+        en += 1
+
+    print(st, en)
+    print(freq)
+    max_len = max(max_len, en - st)
+
+    freq[nums[st]] -= 1
+
+print(max_len)
+~~
+
+
