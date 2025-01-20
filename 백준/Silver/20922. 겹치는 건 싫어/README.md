@@ -60,7 +60,7 @@ print(max_len)
 ~~~
 
 > 2. **max_len = max(max_len, en - st), freq[nums[en]] += 1 후 en++, freq[nums[en]] < K**
-~~python
+~~~python
 import sys
 from collections import defaultdict
 
@@ -77,13 +77,11 @@ for st in range(N):
         freq[nums[en]] += 1
         en += 1
 
-    print(st, en)
-    print(freq)
     max_len = max(max_len, en - st)
 
     freq[nums[st]] -= 1
 
 print(max_len)
-~~
+~~~
 
 
