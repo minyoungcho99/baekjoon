@@ -296,3 +296,6 @@
 
  <p>첫째 줄에 획득한 점수의 합을 출력한다.</p>
 
+### 틀린 부분
+![PS-33](https://github.com/user-attachments/assets/b0f8e483-6324-4222-a800-27eb011e9f14)
+
