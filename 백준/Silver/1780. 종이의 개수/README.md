@@ -33,3 +33,117 @@
 
  <p>첫째 줄에 -1로만 채워진 종이의 개수를, 둘째 줄에 0으로만 채워진 종이의 개수를, 셋째 줄에 1로만 채워진 종이의 개수를 출력한다.</p>
 
+### 틀린 부분 
+> 1. split_paper(0, 0, int((math.log(N, 3))) # call **부동소수점 오류**
+~~~python
+# 종이의 개수
+import sys
+import math
+
+N = int(sys.stdin.readline())
+paper = []
+
+neg = 0
+zero = 0
+pos = 0
+
+for _ in range(N):
+    paper.append(list(map(int, sys.stdin.readline().split())))
+
+
+def check(sx, sy, d):
+    temp = paper[sx][sy]
+    for i in range(sx, sx + 3**d):
+        for j in range(sy, sy+ 3**d):
+            if paper[i][j] != temp:
+                return 2
+
+    return temp
+
+
+def split_paper(sx, sy, d):
+    global neg, zero, pos
+
+    if check(sx, sy, d) != 2:
+        if check(sx, sy, d) == -1:
+            neg += 1
+
+        elif check(sx, sy, d) == 0:
+            zero += 1
+
+        else:
+            pos += 1
+        return
+
+    # recursive call
+    split_paper(sx, sy, d - 1)
+    split_paper(sx + 3**(d - 1), sy, d - 1)
+    split_paper(sx + 2 * 3**(d - 1), sy, d - 1)
+
+    split_paper(sx, sy + 3**(d - 1), d - 1)
+    split_paper(sx + 3**(d - 1), sy + 3**(d - 1), d - 1)
+    split_paper(sx + 2 * 3**(d - 1), sy + 3**(d - 1), d - 1)
+
+    split_paper(sx, sy + 2 * 3**(d - 1), d - 1)
+    split_paper(sx + 3**(d - 1), sy + 2 * 3**(d - 1), d - 1)
+    split_paper(sx + 2 * 3**(d - 1), sy + 2 * 3**(d - 1), d - 1)
+
+
+split_paper(0, 0, int(math.log(N, 3))) # call
+print(neg)
+print(zero)
+print(pos)
+~~~
+재귀 레벨에 맞춰 인덱싱을 해주기 위해 split_paper(0, 0, int(math.log(N, 3)))로 인덱싱했음, len(curr_arr)이 243을 넘어가는 순간 5가 아니라 4.99999... 로 나와서 int()를 씌워주면 0.9999... 값이 버려짐 -> 해결하기 위해서 **int(round(math.log(N, 3))** 하거나 정수 계산 해줌 **N //= 3**
+
+### 고친다면 
+~~~python
+import sys
+
+N = int(sys.stdin.readline())
+paper = []
+
+neg = 0
+zero = 0
+pos = 0
+
+for _ in range(N):
+    paper.append(list(map(int, sys.stdin.readline().split())))
+
+
+def check(sx, sy, size):
+    temp = paper[sx][sy]
+    for i in range(sx, sx + size):
+        for j in range(sy, sy + size):
+            if paper[i][j] != temp:
+                return 2
+
+    return temp
+
+
+def split_paper(sx, sy, size):
+    global neg, zero, pos
+
+    if check(sx, sy, size) != 2:
+        if check(sx, sy, size) == -1:
+            neg += 1
+
+        elif check(sx, sy, size) == 0:
+            zero += 1
+
+        else:
+            pos += 1
+        return
+
+    # 분할 재귀
+    new_size = size // 3
+    for i in range(3):
+        for j in range(3):
+            split_paper(sx + i * new_size, sy + j * new_size, new_size)
+
+
+split_paper(0, 0, N)  # N을 그대로 사용
+print(neg)
+print(zero)
+print(pos)
+~~~
