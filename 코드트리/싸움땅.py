@@ -15,8 +15,8 @@
         nx, ny = x + dx[d], y + dy[d]
 
     # 이동 시 player_map[(x, y)].remove/append(i) 
-    # 본인의 self.num을 append/remove해야 하는데 i로 헷갈림
-    # 이동해서 battle을 trigger하는 i번째 instance가 무조건 져서 움직이도록 함
+    # move_lose()을 호출한 instance의 self.num(n)을 append/remove해야 하는데 i로 헷갈림
+    # 이동해서 battle()을 trigger하는 i번째 instance가 무조건 져서 이동하도록 함
     player_map[(x, y)].remove(n)
     self.loc = (nx, ny)
     player_map[(nx, ny)].append(n)
