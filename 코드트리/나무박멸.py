@@ -1,3 +1,31 @@
+"""
+# 틀린 부분
+1. spread()
+    if max_tree != -1:
+        ans += max_tree
+
+        tree[max_loc[0]][max_loc[1]] = 0
+        treekiller[max_loc[0]][max_loc[1]] = C + 1
+
+        for k in range(4):
+            for time in range(1, K+1):
+                nx, ny = max_loc[0] + ddx[k] * time, max_loc[1] + ddy[k] * time
+
+                if not in_range(nx, ny) or tree[nx][ny] == -1:
+                    break
+
+                if tree[nx][ny] == 0:
+                    treekiller[nx][ny] = C+1
+                    break
+
+                tree[nx][ny] = 0
+                treekiller[nx][ny] = C+1
+                
+# tree[nx][ny] == 0(비어있는 칸)일 때는 treekiller[nx][ny]에 C+1 년만큼 뿌리고 움직임을 멈춰줘야 하는데
+# if not in_range(nx, ny) or tree[nx][ny] < 0:
+#    break
+# 이렇게 해서 비어있는 칸일 때 안 뿌리고 움직임을 멈춤
+"""
 # 나무박멸
 import sys
 
