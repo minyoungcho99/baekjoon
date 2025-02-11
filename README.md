@@ -1,6 +1,6 @@
 # baekjoon
 
-|algorithm||
+|Algorithm||
 |:---:|:---:|
 |String|[ ]|
 |Array|[ ]|
