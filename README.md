@@ -2,7 +2,7 @@
 
 |Algorithm|Completed|
 |:---:|:---:|
-|String|[ ]|
+|String|[X]|
 |Array|[ ]|
 |Linked List|[ ]|
 |Stack|[ ]|
