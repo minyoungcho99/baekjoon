@@ -2,15 +2,15 @@
 
 |algorithm||
 |:---:|:---:|
-|String||
-|Array||
-|Linked List||
-|Stack||
-|Stack+||
-|Queue||
-|Deque||
-|DFS||
-|BFS||
+|String|[ ]|
+|Array|[ ]|
+|Linked List|[ ]|
+|Stack|[ ]|
+|Stack+|[ ]|
+|Queue|[ ]|
+|Deque|[ ]|
+|DFS|[ ]|
+|BFS|[ ]|
 |Recursion||
 |Backtracking||
 |Simulation/Implmentation||
