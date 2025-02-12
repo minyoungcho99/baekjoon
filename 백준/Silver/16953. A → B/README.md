@@ -33,3 +33,26 @@
 
  <p>A를 B로 바꾸는데 필요한 연산의 최솟값에 1을 더한 값을 출력한다. 만들 수 없는 경우에는 -1을 출력한다.</p>
 
+### 틀린 부분 
+### 틀린 부분 
+> 1. visited 배열 사용 **109개의 수가 저장된 배열의 크기는, 하나의 수를 4B라고 가정해도 4000MB임**
+~~~python
+def bfs(start):
+    visited[start] = 1
+    q = deque([start])
+
+    while q:
+        x = q.popleft()
+
+        if x == B:
+            return visited[B]
+
+        for nx in (2*x, int(str(x) + '1')):
+            if nx <= B and not visited[nx]:
+                visited[nx] = visited[x] + 1
+                q.append(nx)
+
+    return -1
+~~~
+
+
