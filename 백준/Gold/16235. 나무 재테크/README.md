@@ -52,3 +52,58 @@
 
  <p>첫째 줄에 K년이 지난 후 살아남은 나무의 수를 출력한다.</p>
 
+### 개선한 부분
+> 1. deque() 사용 -> 가을에 나무가 8방향으로 번식할 때 2차원 배열을 사용하면 가장 나이가 적은 나무들이 나무 배열에 뒤쪽에 위치하게 되며, 다음 봄에 나무가 **나이가 적은 순**으로 양분을 먹을 때 나무가 있는 모든 1x1 배열을 sort()해줘야 함. 따라서 deque()의 appendleft()를 이용해 가장 나이가 적은 나무들이 가장 먼저 양분을 먹을 수 있도록 함
+~~~python
+tree = [[deque([]) for _ in range(N)] for _ in range(N)]
+
+def fall():
+    dx = [-1, 1, 0, 0, -1, -1, 1, 1]
+    dy = [0, 0, -1, 1, 1, -1, 1, -1]
+
+    for i in range(N):
+        for j in range(N):
+            if len(tree[i][j]) > 0:
+                for age in tree[i][j]:
+                    if age % 5 == 0:
+                        for k in range(8):
+                            nx, ny = i + dx[k], j + dy[k]
+                            if in_range(nx, ny):
+                                tree[nx][ny].appendleft(1)
+~~~
+
+> 2. spring()과 summer()를 합침 -> 봄에는 나무가 자신의 나이만큼 양분을 먹고, 나이가 1 증가하거나 양분이 모자라서 죽게 됨 이를 (age, year_died, is_dead)로 deque()에 남겨서 구현했지만 굳이 남길 필요 없이 봄에 죽을 때 죽는 나무들의 age를 저장했다가 마지막에 더해줌
+~~~python
+def spring_summer():
+    for i in range(N):
+        for j in range(N):
+            if len(tree[i][j]) > 0:
+                added_nutr = 0
+                new_tree = deque()
+                for _ in range(len(tree[i][j])):
+                    age = tree[i][j].popleft()
+
+                    if nutr[i][j] >= age:
+                        nutr[i][j] -= age
+                        new_tree.append(age+1)
+
+                    else:
+                        added_nutr += age // 2
+
+                tree[i][j] = new_tree
+                nutr[i][j] += added_nutr
+~~~
+
+> 3. 초기 나무 배열 입력 받을 때 정렬하지 않음 -> **입력으로 주어지는 나무의 위치는 모두 서로 다름** 이라고 주어지기 때문에 불필요함 
+~~~python
+loc = []
+for _ in range(M):
+    x, y, age = map(int, sys.stdin.readline().split())
+    loc.append((x-1, y-1))
+    tree[x-1][y-1].append((age, -1, False))
+
+for lx, ly in loc:
+    tree[lx][ly] = deque(sorted(list(tree[lx][ly])))
+~~~
+
+
