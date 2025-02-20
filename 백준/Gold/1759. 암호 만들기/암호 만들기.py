@@ -2,38 +2,29 @@
 import sys
 
 L, C = map(int, sys.stdin.readline().split())
-a = sys.stdin.readline().split()
-visited = [False] * C
-
-a.sort()
+alph = list(sys.stdin.readline().rstrip().split())
 
 
-def permutation(temp):
+def vowel(temp):
+    cnt = 0
+    for t in temp:
+        if t in "aeiou":
+            cnt += 1
+
+    return cnt
+
+
+def combination(temp, d):
     if len(temp) == L:
-        vo = 0
-        con = 0
-        for t in temp:
-            if t in 'aeiou':
-                vo += 1
-            else:
-                con += 1
-
-        if vo >= 1 and con >= 2:
-            print("".join(temp))
+        v = vowel(temp)
+        if v >= 1 and L - v >= 2:
+            print("".join(map(str, temp)))
 
         return
 
-    for idx in range(C):
-        if not visited[idx]:
-            if temp:
-                if temp[-1] < a[idx]:
-                    visited[idx] = True
-                    permutation(temp + [a[idx]])
-                    visited[idx] = False
-            else:
-                visited[idx] = True
-                permutation(temp + [a[idx]])
-                visited[idx] = False
+    for idx in range(d, C):
+        combination(temp + [alph[idx]], idx+1)
 
 
-permutation([])
+alph.sort()
+combination([], 0)
