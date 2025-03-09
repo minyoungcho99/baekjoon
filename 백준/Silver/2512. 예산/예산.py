@@ -1,3 +1,8 @@
+"""
+고친 부분
+1. print(binary_search(min(request), max(request))) ->  print(binary_search(1, max(request)))
+상한액이 request의 최솟값이라는 보장이 없으니 1 ~ max(request) 사이에서 이분 탐색해야 함
+"""
 # 예산
 import sys
 
