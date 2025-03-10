@@ -2,24 +2,20 @@
 import sys
 
 N = int(sys.stdin.readline())
-S = [0]
-D = [0] * (N+1)
 
+s = []
+dp = [0] * N
 for _ in range(N):
-    S.append(int(sys.stdin.readline()))
+    s.append(int(sys.stdin.readline()))
 
-total = sum(S)
-
-if N == 1:
-    print(total)
-
-elif N == 2:
-    print(total)
+if N <= 2:
+    print(sum(s))
 
 else:
-    D[1] = S[1]
-    D[2] = S[2]
-    D[3] = S[3]
-    for i in range(4, N+1):
-        D[i] = min(D[i-2], D[i-3]) + S[i]
-    print(total - min(D[N-1], D[N-2]))
+    dp[0] = s[0]
+    dp[1] = s[0] + s[1]
+
+    for i in range(2, N):
+        dp[i] = max(dp[i-2], dp[i-3] + s[i-1]) + s[i]
+
+    print(dp[-1])

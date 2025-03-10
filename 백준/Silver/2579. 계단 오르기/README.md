@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 31120 KB, 시간: 32 ms
+메모리: 108384 KB, 시간: 88 ms
 
 ### 분류
 
@@ -12,19 +12,19 @@
 
 ### 제출 일자
 
-2024년 11월 23일 20:06:04
+2025년 3월 10일 17:22:56
 
 ### 문제 설명
 
 <p>계단 오르기 게임은 계단 아래 시작점부터 계단 꼭대기에 위치한 도착점까지 가는 게임이다. <그림 1>과 같이 각각의 계단에는 일정한 점수가 쓰여 있는데 계단을 밟으면 그 계단에 쓰여 있는 점수를 얻게 된다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 300px; height: 160px;"></p>
+<p style="text-align: center;"><img alt="" src="https://u.acmicpc.net/7177ea45-aa8d-4724-b256-7b84832c9b97/Screen%20Shot%202021-06-23%20at%203.00.46%20PM.png" style="width: 300px; height: 160px;"></p>
 
 <p style="text-align: center;"><그림 1></p>
 
 <p>예를 들어 <그림 2>와 같이 시작점에서부터 첫 번째, 두 번째, 네 번째, 여섯 번째 계단을 밟아 도착점에 도달하면 총 점수는 10 + 20 + 25 + 20 = 75점이 된다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 300px; height: 190px;"></p>
+<p style="text-align: center;"><img alt="" src="https://u.acmicpc.net/f00b6121-1c25-492e-9bc0-d96377c586b0/Screen%20Shot%202021-06-23%20at%203.01.39%20PM.png" style="width: 300px; height: 190px;"></p>
 
 <p style="text-align: center;"><그림 2></p>
 
@@ -49,11 +49,4 @@
 ### 출력 
 
  <p>첫째 줄에 계단 오르기 게임에서 얻을 수 있는 총 점수의 최댓값을 출력한다.</p>
-
-### 틀린 부분 
-~~~python
-print(total - min(D[N-1], D[N-2]))
-~~~
-**테이블의 정의를 D[i] = i번째 계단(밟지 않음)까지 올라섰을 때 밟지 않은 계단의 합의 최솟값이라고 생각했다면, 총 계단에 쓰여있는 점수의 합에서 min값을 빼주는 부분이 필요하고, 제일 끝 계단에서도 D[N-1]을 밟거나 D[N-2]를 밟을 수 있기 때문에 그에 따른 최솟값 처리가 필요함**
-
 
