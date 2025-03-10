@@ -1,3 +1,29 @@
+"""
+디버깅한 부분
+1. 참가자는 주어진 판들을 시계 방향, 혹은 반시계 방향으로 자유롭게 회전할 수 있다. 
+회전을 완료한 후 참가자는 판 5개를 쌓는다. 판을 쌓는 순서는 참가자가 자유롭게 정할 수 있다. 
+
+-> 따라서 각각의 판은 0도, 90도, 180도, 270도 회전할 수 있고
+각각의 판을 순서대로 쌓는 경우까지 해줘야 됨
+문제를 안 읽어서 판의 순서 부분을 구현을 하지 않음
+
+
+2. 
+def permutation_layer(temp):
+    if len(temp) == 5:
+        permu_layer.append(temp)
+        return
+
+    for i in range(5):
+        if not visited[i]:
+            visited[i] = True
+            permutation_layer(temp + [rr[i]])
+            visited[i] = False
+
+회전 순열을 구하는 경우에는 판끼리 돌리는 정도가 겹쳐도 괜찮지만 (중복순열)
+쌓는 순열을 구할 때는 한 칸에 하나의 판씩 들어가야 해서 visited가 필요함 (permutation w/o repetition)
+"""
+
 # Maaaaaaaaaze
 import sys
 from collections import deque
