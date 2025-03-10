@@ -2,24 +2,20 @@
 import sys
 
 N = int(sys.stdin.readline())
-RGB = []
 
+rgb = []
 for _ in range(N):
-    RGB.append(list(map(int, sys.stdin.readline().split())))
+    rgb.append(list(map(int, sys.stdin.readline().split())))
 
-D = [[0 for _ in range(3)] for _ in range(N+1)]
+dp = [[0] * 3 for _ in range(N)]
 
-D[1][0] = RGB[0][0] # red
-D[1][1] = RGB[0][1] # green
-D[1][2] = RGB[0][2] # blue
+dp[0][0] = rgb[0][0]
+dp[0][1] = rgb[0][1]
+dp[0][2] = rgb[0][2]
 
-if N == 1:
-    print(min(D[1]))
+for i in range(1, N):
+    dp[i][0] = min(dp[i - 1][1], dp[i - 1][2]) + rgb[i][0]
+    dp[i][1] = min(dp[i - 1][0], dp[i - 1][2]) + rgb[i][1]
+    dp[i][2] = min(dp[i - 1][0], dp[i - 1][1]) + rgb[i][2]
 
-else:
-    for i in range(2, N+1):
-        D[i][0] = min(D[i - 1][1], D[i - 1][2]) + RGB[i - 1][0]
-        D[i][1] = min(D[i - 1][0], D[i - 1][2]) + RGB[i - 1][1]
-        D[i][2] = min(D[i - 1][0], D[i - 1][1]) + RGB[i - 1][2]
-
-    print(min(D[N]))
+print(min(dp[N-1]))
