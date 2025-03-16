@@ -1,4 +1,10 @@
 import sys, itertools
+"""
+디버깅한 부분
+1. combination을 재귀 백트래킹으로 구현
+O(len(etc), K-5)이면 최악의 경우 C(21, 10)이기 때문에 너무 큼 
+-> itertools combination 써서 조합을 더 빠르게 구현 
+"""
 
 def count_readable_words(selected):
     selected_set = set(selected)
