@@ -4,6 +4,8 @@ import sys, itertools
 1. combination을 재귀 백트래킹으로 구현
 O(len(etc), K-5)이면 최악의 경우 C(21, 10)이기 때문에 너무 큼 
 -> itertools combination 써서 조합을 더 빠르게 구현 
+
+2. ord()와 direct address table 사용하면 더 빠르게 연산할 수 있는데, 생각해내기가 힘들거같다 ..ㅎ
 """
 
 def count_readable_words(selected):
