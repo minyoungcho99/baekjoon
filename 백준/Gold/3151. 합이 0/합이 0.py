@@ -38,6 +38,10 @@ if num[st] + num[en] + target == 0:
         ans += en - dup_i + 1
     st += 1 # 그리고 다음 st의 조합 탐색
 
+3. 투포인터 인덱스 에러 조심하자
+for i in range(N-2):
+    find_zero(i, num[i])
+    
 완탐+투포인터+이분탐색의 어려운 문제..ㅎ 왜 골4지
 """
 # 합이 0
